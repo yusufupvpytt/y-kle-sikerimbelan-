@@ -1,0 +1,84 @@
+function recoil()
+
+        local library = loadstring(game:HttpGet(('https://cdn.senz.xyz/s/JrEnL5kX7C.txt')))()
+        local w = library:CreateWindow("Recoil Beta")
+        local b = w:CreateFolder("Combat")
+        local m = w:CreateFolder("Movement")
+        local g = w:CreateFolder("Gui Settings")
+        ValueHitbox = 1
+        b:Slider("Hitbox Size",10,function(b0)
+            --fatfatfat
+            ValueHitbox = b0
+        end)
+        b:Toggle("Toggle Hitbox",function(hitbox1)
+            --fatfatfat
+            b1 = hitbox1
+            spawn(function()
+                pcall(function()
+                    game.RunService.RenderStepped:Connect(function()
+                        if b1 == true then
+                            for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+                                if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+                                    v.Character.Head.CanCollide = false
+                                    v.Character.Head.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                    v.Character.LowerTorso.CanCollide = false
+                                    v.Character.LowerTorso.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                    v.Character.Head.Transparency = 0.2
+                                    v.Character.LowerTorso.Transparency = 0.2
+                                end
+                            end
+                        else
+                            for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+                                if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+                                    v.Character.LowerTorso.Size = Vector3.new(1, 1, 0.7)
+                                    v.Character.Head.Size = Vector3.new(0.8, 1, 0.63)
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+        end)
+        m:Slider("Boost Power",30,function(value1)
+            --fatfatfat
+            BoostPower = value1
+        end)
+        m:Toggle("Speed boost",function(boost)
+            --fatfatfat
+            boost1 = boost
+            spawn(function()
+                while boost1 == true do wait()
+                    pcall(function()
+                        for i=1,BoostPower do
+                            if game.Players.LocalPlayer.Character.Humanoid.MoveDirection == Vector3.new(0,0,0) then
+                            else
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,-0.1)
+                            end
+                        end
+                    end)
+                end
+            end)
+        end)
+            
+        m:Slider("JumpPower",350,function(value2)
+            --fatfatfat
+            jumppop = value2
+        end)
+        m:Toggle("Toggle JumpPower",function(bool)
+            --fatfatfat
+            v1 = bool
+            spawn(function()
+                game.RunService.RenderStepped:Connect(function()
+                    if v1 == true then
+                        game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumppop
+                    end
+                end)
+            end)
+        end)
+        g:DestroyGUI()
+        g:Button("Rejoin Game",function()
+        game:GetService('TeleportService'):Teleport(game.PlaceId)
+        end)
+    end
+    recoil()
+    print("work")
