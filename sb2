@@ -1,0 +1,212 @@
+function sb2()
+    local tween
+    function toTarget(pos, targetPos, targetCFrame)
+        local tween_s = game:service"TweenService"
+        local info = TweenInfo.new((targetPos - pos).Magnitude/34, Enum.EasingStyle.Quad)
+        local tic_k = tick()
+        local tween, err = pcall(function()
+            tween = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = targetCFrame})
+            tween:Play()
+        end)
+        if not tween then return err end
+    end
+    local library = loadstring(game:HttpGet(('https://cdn.senz.xyz/s/JrEnL5kX7C.txt')))()
+    local w = library:CreateWindow("Sb2") 
+    local b = w:CreateFolder("Main")  
+    local m = w:CreateFolder("Movement")
+    local s
+    repeat wait()
+        if s == nil then
+            for i,v in pairs(getnilinstances()) do 
+                if v:IsA("ModuleScript") then  
+                    s = require(v)
+                end
+            end
+        end
+    until s ~= nil
+    m:Slider("WalkSpeed",35,function(value1)
+        
+        walkpop = value1
+    end)
+    m:Toggle("Toggle Walkspeed",function(bool)
+        
+        v1 = bool
+        spawn(function()
+            game.RunService.RenderStepped:Connect(function()
+                if v1 == true then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkpop
+                end
+            end)
+        end)
+    end)
+    m:Toggle("MaxZoom",function(m2)
+        
+        mv2 = m2
+        spawn(function()
+            while mv2 == true do wait()
+                if mv2 == true then
+                    game.Players.LocalPlayer.CameraMaxZoomDistance = math.huge
+                else
+                    game.Players.LocalPlayer.CameraMaxZoomDistance = 15
+                end
+            end
+        end)
+    end)
+    local mobsList = {}
+    _G.studs = 10
+    _G.method = 0
+    pcall(function()
+        for i,v in pairs(workspace.Mobs:GetChildren()) do
+            if v:FindFirstChild("HumanoidRootPart") and not table.find(mobsList, v.Name) then
+                table.insert(mobsList, v.Name)
+            end
+        end
+    end)
+    req = require or getmenv
+    function autoFarm()
+        pcall(function()
+            for i,v in pairs(workspace.Mobs:GetChildren()) do
+                if string.match(v.Name, _G.mob) and v:FindFirstChild("Entity") and v.Entity:FindFirstChild("Health") and v:FindFirstChild("HumanoidRootPart") and tonumber(v.Entity.Health.Value) > 0 then
+                    repeat wait()
+                        toTarget(game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position,v.HumanoidRootPart.Position,v.HumanoidRootPart.CFrame*CFrame.new(0,1,0) - v.HumanoidRootPart.CFrame.lookVector * 2.2)
+                    until v == nil or v.HumanoidRootPart == nil or v.Parent == nil or not w.flags.af or tonumber(v.Entity.Health.Value) <= 0
+                end
+            end
+        end)
+    end
+    b:Toggle("Autofarm",function(b2)
+        
+    bv2 = b2
+        if b2 == false and tween ~= nil then
+            tween:Pause()
+        end
+    end)
+    b:Dropdown("Mobs",mobsList,function(a)
+        
+        _G.mob = a
+    end)
+    function infe()
+        pcall(function()
+            if game:GetService("Players").LocalPlayer.Character then
+                game:GetService("Players").LocalPlayer.Character.Entity.Stamina.Value = 100
+            end
+        end)
+    end
+    b:Toggle("Infinite Stamina",function(b1)
+        
+    bv1 = b1
+    spawn(function()
+        while bv1 == true do wait()
+            infe()
+        end
+    end)
+    end)
+    spawn(function()
+        while wait() do
+            if bv2 then
+                autoFarm()
+            end
+        end
+    end)
+    spawn(function()
+        while wait() do
+            if bv2 then
+                s.Services.Combat.AttackRequest(0,nil,function() return nil end)
+                wait(.15)
+            end
+        end
+    end)
+    spawn(function()
+        while game:GetService("RunService").Heartbeat:wait() do
+            if bv2 then
+                pcall(function()
+                    game:GetService("Players").LocalPlayer.Character.Humanoid:ChangeState(11)
+                end)
+            end
+        end
+    end)
+    b:DestroyGUI()
+    end
+    function recoil()
+
+        local library = loadstring(game:HttpGet(('https://cdn.senz.xyz/s/JrEnL5kX7C.txt')))()
+        local w = library:CreateWindow("Recoil Beta")
+        local b = w:CreateFolder("Combat")
+        local m = w:CreateFolder("Movement")
+        local g = w:CreateFolder("Gui Settings")
+        ValueHitbox = 1
+        b:Slider("Hitbox Size",10,function(b0)
+            --fatfatfat
+            ValueHitbox = b0
+        end)
+        b:Toggle("Toggle Hitbox",function(hitbox1)
+            --fatfatfat
+            b1 = hitbox1
+            spawn(function()
+                pcall(function()
+                    game.RunService.RenderStepped:Connect(function()
+                        if b1 == true then
+                            for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+                                if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+                                    v.Character.Head.CanCollide = false
+                                    v.Character.Head.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                    v.Character.LowerTorso.CanCollide = false
+                                    v.Character.LowerTorso.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                    v.Character.Head.Transparency = 0.2
+                                    v.Character.LowerTorso.Transparency = 0.2
+                                end
+                            end
+                        else
+                            for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+                                if v.Name ~= game:GetService("Players").LocalPlayer.Name then
+                                    v.Character.LowerTorso.Size = Vector3.new(1, 1, 0.7)
+                                    v.Character.Head.Size = Vector3.new(0.8, 1, 0.63)
+                                end
+                            end
+                        end
+                    end)
+                end)
+            end)
+        end)
+        m:Slider("Boost Power",30,function(value1)
+            --fatfatfat
+            BoostPower = value1
+        end)
+        m:Toggle("Speed boost",function(boost)
+            --fatfatfat
+            boost1 = boost
+            spawn(function()
+                while boost1 == true do wait()
+                    pcall(function()
+                        for i=1,BoostPower do
+                            if game.Players.LocalPlayer.Character.Humanoid.MoveDirection == Vector3.new(0,0,0) then
+                            else
+                                game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame =game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,-0.1)
+                            end
+                        end
+                    end)
+                end
+            end)
+        end)
+            
+        m:Slider("JumpPower",350,function(value2)
+            --fatfatfat
+            jumppop = value2
+        end)
+        m:Toggle("Toggle JumpPower",function(bool)
+            --fatfatfat
+            v1 = bool
+            spawn(function()
+                game.RunService.RenderStepped:Connect(function()
+                    if v1 == true then
+                        game.Players.LocalPlayer.Character.Humanoid.JumpPower = jumppop
+                    end
+                end)
+            end)
+        end)
+        g:DestroyGUI()
+        g:Button("Rejoin Game",function()
+        game:GetService('TeleportService'):Teleport(game.PlaceId)
+        end)
+    end
+    sb2()
