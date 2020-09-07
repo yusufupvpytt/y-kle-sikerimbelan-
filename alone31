@@ -1,0 +1,220 @@
+    function Alone()
+        local library = loadstring(game:HttpGet(('https://cdn.senz.xyz/s/JrEnL5kX7C.txt')))() -- It's obfuscated, I won't let you see my ugly coding skills. =)
+        
+        local w = library:CreateWindow("Alone")
+        
+        local b = w:CreateFolder("Combat")
+        
+        local m = w:CreateFolder("Movement")
+        
+        local g = w:CreateFolder("Gui Settings")
+        
+        -- m Folder
+        
+        
+        m:Slider("WalkSpeed",60,function(value1) -- WalkSpeed Value
+            --fatfatfat
+            walkpop = value1
+        end)
+        
+        m:Toggle("Toggle Walkspeed",function(bool) -- Loops The walkspeed
+            --fatfatfat
+        v1 = bool
+        spawn(function()
+            game.RunService.RenderStepped:Connect(function()
+                if v1 == true then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkpop
+                end
+            end)
+        end)
+        end)
+        
+        -- w Folder
+        
+        
+        -- b Folder
+        
+        b:Slider("Distance",20,function(ddd) -- WalkSpeed Value
+            --fatfatfat
+            dd1 = ddd
+        end)
+        
+        dd1 = 1
+        b:Toggle("Farm Zombies",function(b01) -- Loops The walkspeed
+            --fatfatfat
+        bv01 = b01
+        spawn(function()
+            if bv01 == true then
+            local s = Instance.new("Sound")
+        s.Name = "Sound"
+        s.SoundId = "http://www.roblox.com/asset/?id=1584394759"
+        s.Volume = 6
+        s.Looped = false
+        s.archivable = false
+        s.Parent = game.Workspace
+        wait()
+        s:play()
+        
+        local NotificationBindable = Instance.new("BindableFunction")
+        NotificationBindable.OnInvoke = callback
+        --
+        game.StarterGui:SetCore("SendNotification",  {
+        Title = "TIP!";
+        Text = "Use Knifes for farming and use a auto clicker";
+        Icon = "http://www.roblox.com/asset/?id=4792378908";
+        Duration = 5;
+        Callback = NotificationBindable;
+        })
+        end
+            while bv01 == true do wait()
+                for i,v in pairs(game:GetService("Workspace").Ragdolls:GetChildren()) do
+                    if v.Name == "" or "" then
+                    v:Remove()
+                    end
+                    end
+                if bv01 == true then
+                    game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-182.406891, 64.0096436, -315.472717)
+                for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                    if v:findFirstChild("Head") then
+                        v.Head.Anchored = true
+                        v.Head.CFrame = game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame*CFrame.new(0,0,-dd1)
+                    end
+                end
+            else
+                for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                    if v:findFirstChild("Head") then
+                        v.Head.Anchored = false
+                    end
+                end
+            end
+            end
+        end)
+        end)
+        
+        ValueHitbox = 1 -- Standerd Value
+        b:Slider("Hitbox Size",50,function(b0) -- Hitbox Size
+            --fatfatfat
+            ValueHitbox = b0
+        end)
+        
+        b:Toggle("Toggle Hitbox",function(hitbox1) -- Toggles Hitbox
+            --fatfatfat
+            b1 = hitbox1
+            spawn(function()
+                pcall(function()
+                    while b1 == true do
+                        wait(.1)
+                        if b1 == true then
+                            function getplrsname()
+                                for i,v in pairs(game:GetChildren()) do
+                                    if v.ClassName == "Players" then
+                                        return v.Name
+                                    end
+                                end
+                            end
+                            local players = getplrsname()
+                            local plr = game[players].LocalPlayer
+                            coroutine.resume(coroutine.create(function()
+                                coroutine.resume(coroutine.create(function()
+                                    for _,v in pairs(game[players]:GetPlayers()) do
+                                        if v.Name ~= plr.Name and v.Character then
+                                                v.Character.HumanoidRootPart.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                                v.Character.HumanoidRootPart.CanCollide = false
+                                        end
+                                    end
+                                end))
+                            end))
+                            for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                                if v:findFirstChild("HumanoidRootPart") then
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                end
+                            end
+                        else
+                            for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                                if v:findFirstChild("HumanoidRootPart") then
+                                    v.HumanoidRootPart.CanCollide = false
+                                    v.HumanoidRootPart.Size = Vector3.new(1,1,1)
+                                end
+                            end
+                            function getplrsname()
+                                for i,v in pairs(game:GetChildren()) do
+                                    if v.ClassName == "Players" then
+                                        return v.Name
+                                    end
+                                end
+                            end
+                            local players = getplrsname()
+                            local plr = game[players].LocalPlayer
+                            coroutine.resume(coroutine.create(function()
+                                coroutine.resume(coroutine.create(function()
+                                    for _,v in pairs(game[players]:GetPlayers()) do
+                                        if v.Name ~= plr.Name and v.Character then
+                                            v.Character.HumanoidRootPart.Size = Vector3.new(1,1,1)
+                                        end
+                                    end
+                                end))
+                            end))
+                        end
+                    end
+                end)
+            end)
+        end)
+        
+        
+        b:Toggle("Show Hitbox",function(hitbox2) -- Shows the hitbox
+            b2 = hitbox2
+            spawn(function()
+                pcall(function()
+                    while b2 == true do
+                        wait(.1)
+                        function getplrsname()
+                            for i,v in pairs(game:GetChildren()) do
+                                if v.ClassName == "Players" then
+                                    return v.Name
+                                end
+                            end
+                        end
+                        local players = getplrsname()
+                        local plr = game[players].LocalPlayer
+                        coroutine.resume(coroutine.create(function()
+                            coroutine.resume(coroutine.create(function()
+                                for _,v in pairs(game[players]:GetPlayers()) do
+                                    if v.Name ~= plr.Name and v.Character then
+                                        if b2 == true then
+                                            v.Character.HumanoidRootPart.CanCollide = false
+                                            v.Character.HumanoidRootPart.Transparency = 0.7
+                                            for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                                                if v:findFirstChild("HumanoidRootPart") then
+                                                    v.HumanoidRootPart.Transparency = 0.7
+                                                end
+                                            end
+                                        else
+                                            for i,v in pairs(game:GetService("Workspace").Camera.Entities:GetChildren()) do
+                                                if v:findFirstChild("HumanoidRootPart") then
+                                                    v.HumanoidRootPart.Transparency = 1
+                                                end
+                                            end
+                                            v.Character.HumanoidRootPart.Transparency = 1
+                                        end
+                                    end
+                                end
+                            end))
+                        end))
+                    end
+                end)
+            end)
+        end)
+        
+        
+        -- g Folder
+        
+        g:DestroyGUI()
+        
+        g:Button("Rejoin Game",function()
+            --fatfatfat
+        game:GetService('TeleportService'):Teleport(game.PlaceId)
+        end)
+    end
+    Alone()
+    print("load")
