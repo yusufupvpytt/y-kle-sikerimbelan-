@@ -1,0 +1,309 @@
+   function WildWest()
+        local library = loadstring(game:HttpGet(('https://cdn.senz.xyz/s/JrEnL5kX7C.txt')))() -- It's obfuscated, I won't let you see my ugly coding skills. =)
+        
+        local w = library:CreateWindow("Wild West")
+        
+        -- w Create Folders
+        
+        local b = w:CreateFolder("Combat")
+        
+        local h2 = w:CreateFolder("Weapon")
+        
+        local m = w:CreateFolder("Movement")
+        
+        local esp = w:CreateFolder("Visual")
+        
+        local g = w:CreateFolder("Gui Settings")
+        
+        -- w Folder
+        
+        h2:Button("Fast Reload  ",function()
+            --fatfatfat
+            for i, v in pairs(getgc(true)) do
+                if type(v) == "table" and rawget(v, "BaseRecoil") then
+                    v.LoadSpeed = 9e3
+                    v.LoadEndSpeed = 9e3
+                    v.ReloadSpeed = 9e3
+                end
+            end
+        end)
+        
+        h2:Button("No Recoil",function()
+            --fatfatfat
+            for i, v in pairs(getgc(true)) do
+                if type(v) == "table" and rawget(v, "BaseRecoil") then
+                    v.BaseRecoil = 0
+                    v.FireSpeed = 9e3
+                end
+            end
+        end)
+        
+        h2:Button("No Spread",function()
+            --fatfatfat
+            for i, v in pairs(getgc(true)) do
+                if type(v) == "table" and rawget(v, "BaseRecoil") then
+                    v.ProjectileAccuracy  = 999999999
+                    v.ProjectilePenetration = 100
+                    v.ProjectilePower = 10000
+                    v.ProjectileDamage = 10000
+                end
+            end
+        end)
+        
+        -- b Folder
+        
+        b:Label("Hitboxes are CanCollide",Color3.fromRGB(30, 30, 30),Color3.fromRGB(255,255,255)) -- Credit Text
+        
+        ValueHitbox = 1 -- Standerd Value
+        b:Slider("Hitbox Size",30,function(b0) -- Hitbox Size
+            --fatfatfat
+            ValueHitbox = b0
+        end)
+        
+        b:Toggle("Toggle Hitbox",function(hitbox1) -- Toggles Hitbox
+            --fatfatfat
+        b1 = hitbox1
+        spawn(function()
+            pcall(function()
+            while b1 == true do
+                wait(.1)
+                if b1 == true then
+                    local players = getplrsname()
+                    local plr = game[players].LocalPlayer
+                    spawn(function()
+                        for _,v in pairs(game[players]:GetPlayers()) do
+                            if v.Name ~= plr.Name and v.Character then
+                                v.Character.Head.Transparency = 1
+                                v.Character.HumanoidRootPart.CanCollide = false
+                                v.Character.HumanoidRootPart.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                v.Character.Head.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                            end
+                        end
+                    end)
+                else
+                    v.Character.RightUpperLeg.Transparency = 0
+                    v.Character.Head.Transparency = 0
+                    v.Character.Head.Size = Vector3.new(1.4497, 1.3017, 1.3017,1.4497, 1.3017, 1.3017,1.4497, 1.3017, 1.3017)
+            end
+            end
+        end)
+        end)
+        end)
+        
+        
+    b:Toggle("Show Hitbox",function(hitbox2) -- Shows the hitbox
+        --fatfatfat
+        b2 = hitbox2
+        spawn(function()
+            pcall(function()
+                while b2 == true do
+                    wait(.1)
+                    local players = getplrsname()
+                    local plr = game[players].LocalPlayer
+                    spawn(function()
+                        for _,v in pairs(game[players]:GetPlayers()) do
+                            if v.Name ~= plr.Name and v.Character then
+                                if b2 == true then
+                                    if HitPart == "Torso" then
+                                        v.Character.RightUpperLeg.Transparency = 10
+                                        v.Character.LeftUpperLeg.Transparency = 10
+                                    end
+                                    v.Character.HumanoidRootPart.CanCollide = false
+                                    v.Character.HumanoidRootPart.Transparency = 0.7
+                                    v.Character.HumanoidRootPart.Size = Vector3.new(ValueHitbox,ValueHitbox,ValueHitbox)
+                                elseif b2 == false then
+                                    v.Character.HumanoidRootPart.Transparency = 1
+                                end
+                            end
+                        end
+                    end)
+                end
+            end)
+        end)
+    end)
+        
+        
+    b:Toggle("Animal Hitbox",function(hitbox2) -- Toggles Hitbox
+        --fatfatfat
+        htv2 = hitbox2
+        spawn(function()
+            pcall(function()
+                while htv2 == true do
+                    wait(.1)
+                    for i,v in pairs(workspace["WORKSPACE_Entities"].Animals:GetChildren()) do
+                        if v:findFirstChild("HumanoidRootPart") then
+                            v.HumanoidRootPart.CanCollide = false
+                            v.HumanoidRootPart.Transparency = 10
+                            v.HumanoidRootPart.Size = Vector3.new(5,5,5)
+                            v.Head.CanCollide = false
+                            v.Head.Transparency = 0.8
+                            v.Head.Size = Vector3.new(9,9,9)
+                        end
+                    end
+                end
+        end)
+        end)
+    end)
+        -- m Folder
+        
+        m:Slider("WalkSpeed",30,function(value1) -- WalkSpeed Value
+            --fatfatfat
+            walkpop = value1
+        end)
+        
+        
+        m:Toggle("Toggle Walkspeed",function(bool) -- Loops The walkspeed
+            --fatfatfat
+        v1 = bool
+        spawn(function()
+            game.RunService.RenderStepped:Connect(function()
+                if v1 == true then
+                    game.Players.LocalPlayer.Character.Humanoid.WalkSpeed = walkpop
+                end
+            end)
+        end)
+        end)
+        
+        
+        m:Toggle("MaxZoom",function(m2) -- Read name
+            --fatfatfat
+            mv2 = m2
+        spawn(function()
+            while mv2 == true do wait()
+                if mv2 == true then
+                game.Players.LocalPlayer.CameraMaxZoomDistance = 999999999999999
+                else
+                    game.Players.LocalPlayer.CameraMaxZoomDistance = 20
+                end
+            end
+        end)
+        end)
+        -- esp folder
+        
+        esp:Toggle("Name Esp",function(esp1) -- Toggle/Untoggle Esp
+            --fatfatfat
+            esp2 = esp1
+            spawn(function()
+                wait()
+                if esp2 == true then
+                    local Holder = Instance.new("Folder", game.CoreGui)
+                    Holder.Name = "ESP"
+                    local Box = Instance.new("BoxHandleAdornment")
+                    Box.Name = "nilBox"
+                    Box.Size = Vector3.new(4, 7, 4)
+                    Box.Color3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+                    Box.Transparency = 1000
+                    Box.ZIndex = 0
+                    Box.AlwaysOnTop = false
+                    Box.Visible = false
+                    local NameTag = Instance.new("BillboardGui")
+                    NameTag.Name = "nilNameTag"
+                    NameTag.Enabled = false
+                    NameTag.Size = UDim2.new(0, 200, 0, 50)
+                    NameTag.AlwaysOnTop = true
+                    NameTag.StudsOffset = Vector3.new(0, 1.8, 0)
+                    local Tag = Instance.new("TextLabel", NameTag)
+                    Tag.Name = "Tag"
+                    Tag.BackgroundTransparency = 1
+                    Tag.Position = UDim2.new(0, -50, 0, 0)
+                    Tag.Size = UDim2.new(0, 300, 0, 20)
+                    Tag.TextSize = 20
+                    Tag.TextColor3 = Color3.new(100 / 255, 100 / 255, 100 / 255)
+                    Tag.TextStrokeColor3 = Color3.new(0 / 255, 0 / 255, 0 / 255)
+                    Tag.TextStrokeTransparency = 0.4
+                    Tag.Text = "nil"
+                    Tag.Font = Enum.Font.SourceSansBold
+                    Tag.TextScaled = false
+                    
+                    local LoadCharacter = function(v)
+                        repeat wait() until v.Character ~= nil
+                        v.Character:WaitForChild("Humanoid")
+                        local vHolder = Holder:FindFirstChild(v.Name)
+                        vHolder:ClearAllChildren()
+                        local b = Box:Clone()
+                        b.Name = v.Name .. "Box"
+                        b.Adornee = v.Character
+                        b.Parent = vHolder
+                        local t = NameTag:Clone()
+                        t.Name = v.Name .. "NameTag"
+                        t.Enabled = true
+                        t.Parent = vHolder
+                        t.Adornee = v.Character:WaitForChild("Head", 5)
+                        if not t.Adornee then
+                            return UnloadCharacter(v)
+                        end
+                        t.Tag.Text = v.Name
+                        b.Color3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+                        t.Tag.TextColor3 = Color3.new(v.TeamColor.r, v.TeamColor.g, v.TeamColor.b)
+                        local Update
+                        local UpdateNameTag = function()
+                            if not pcall(function()
+                                v.Character.Humanoid.DisplayDistanceType = Enum.HumanoidDisplayDistanceType.None
+                
+                                t.Tag.Text = v.Name .. "\n" .. ((maxh ~= 0 and tostring(math.floor((h / maxh) * 100))) or "0") .. "%  " .. tostring(h) .. "/" .. tostring(maxh)
+                            end) then
+                                Update:Disconnect()
+                            end
+                        end
+                        UpdateNameTag()
+                        Update = v.Character.Humanoid.Changed:Connect(UpdateNameTag)
+                    end
+                    local UnloadCharacter = function(v)
+                        local vHolder = Holder:FindFirstChild(v.Name)
+                        if vHolder and (vHolder:FindFirstChild(v.Name .. "Box") ~= nil or vHolder:FindFirstChild(v.Name .. "NameTag") ~= nil) then
+                            vHolder:ClearAllChildren()
+                        end
+                    end
+                    local LoadPlayer = function(v)
+                        local vHolder = Instance.new("Folder", Holder)
+                        vHolder.Name = v.Name
+                        v.CharacterAdded:Connect(function()
+                            pcall(LoadCharacter, v)
+                        end)
+                        v.CharacterRemoving:Connect(function()
+                            pcall(UnloadCharacter, v)
+                        end)
+                        v.Changed:Connect(function(prop)
+                            if prop == "TeamColor" then
+                                UnloadCharacter(v)
+                                wait()
+                                LoadCharacter(v)
+                            end
+                        end)
+                        LoadCharacter(v)
+                    end
+                    
+                    local UnloadPlayer = function(v)
+                        UnloadCharacter(v)
+                        local vHolder = Holder:FindFirstChild(v.Name)
+                        if vHolder then
+                            vHolder:Destroy()
+                        end
+                    end
+                    
+                    for i,v in pairs(game:GetService("Players"):GetPlayers()) do
+                        spawn(function() pcall(LoadPlayer, v) end)
+                    end
+                    
+                    game:GetService("Players").PlayerAdded:Connect(function(v)
+                        pcall(LoadPlayer, v)
+                    end)
+                    
+                    game:GetService("Players").PlayerRemoving:Connect(function(v)
+                        pcall(UnloadPlayer, v)
+                    end)
+                    
+                    game:GetService("Players").LocalPlayer.NameDisplayDistance = 0
+                else
+                    pcall(function()
+                        game.CoreGui.ESP:Remove()
+                    end)
+                    end
+            end)
+        end)
+        
+        -- g Folder
+        
+        g:DestroyGUI()
+    end
+    WildWest()
